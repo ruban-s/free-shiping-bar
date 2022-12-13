@@ -1,0 +1,40 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model shipbars {
+  id               Int      @id @default(autoincrement())
+  uuid             String   @unique @db.VarChar(255)
+  name             String
+  content          String
+  background       String
+  position         String
+  fontColor        String
+  specialTextColor String
+  fontFamily       String
+  fontSize         String
+  closeButton      String
+  shipingGoal      String
+  currency         String
+  currencyPosition String
+  currencyContent  String
+  isActive         String   @default("false")
+  createdAt        DateTime @default(now())
+  shop             String
+}
+
+model shops {
+  id      Int     @id @default(autoincrement())
+  uuid    String  @unique @db.VarChar(255)
+  shopId  String
+  name    String  @unique
+  animate Boolean @default(true)
+}

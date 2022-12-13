@@ -1,0 +1,53 @@
+<div  id="demo">
+</div>
+<button id="btn" style="position: absolute;top:10px;right:10px; width:50px;z-index:1001; display: none">
+    close
+</button>
+
+<script>
+let a = document.getElementById("shopify-section-announcement-bar");
+
+let announceBar = document.getElementById("demo");
+let button = document.getElementById("btn");
+button.addEventListener("click",()=>{
+ announceBar.style.display="none"
+button.style.display="none"
+})
+
+const url = `https://free-shipping-bars.herokuapp.com/get-script?shop=${window.location.hostname}`
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+      if(data.lenght===0){
+        announceBar.style.display="none"
+      }else{
+        announceBar.innerHTML =`<p style="color:${data[0].fontColor};  font-size:${data[0].fontSize}px;"> ${data[0].content}<span style="color:${data[0].specialTextColor}; margin-left:5px;font-weight:bolder">${data[0].currencyContent}</span><p/>`;    
+        announceBar.style.cssText=`
+        position:${data[0].position};
+        top: 0;
+        left: 0 ;
+        height:40px;
+        width:100%;
+        background:${data[0].background};
+        z-index:1000;
+        font-family: ${data[0].fontFamily};
+        display:flex;
+        align-items:center;
+        justify-content:center`
+      }
+      if(data[0].closeButton==="YES"){
+        button.style.display="block"
+      }
+      if(data[0].position==="fixed"){
+        button.style.position="fixed"
+      }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "custom annnoucement bar",
+    "target": "head",
+    "settings": []
+  }
+{% endschema %}
