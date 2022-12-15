@@ -39,12 +39,16 @@ export const Table = ({ closeAnimate }) => {
   async function getTemplate() {
     const count = await fetch(`/announcementBar`).then((res) => res.json());
     set_templates(count);
-    console.log(count);
     count.map((e) => {
       if (e.isActive === "true") {
         setActive(e.uuid);
       }
     });
+  }
+  async function getScript() {
+    const count = await fetch(`/get-script`).then((res) => res.json());
+
+    console.log(count);
   }
 
   async function deleted(e) {
@@ -154,6 +158,9 @@ export const Table = ({ closeAnimate }) => {
                         </ActiveButton>
                         <ActiveButton delete onClick={() => deleted(info.uuid)}>
                           Delete
+                        </ActiveButton>
+                        <ActiveButton delete onClick={() => getScript()}>
+                          check
                         </ActiveButton>
                       </Stack>,
                     ];

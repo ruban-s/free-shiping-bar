@@ -1,20 +1,22 @@
 <div  id="demo">
+
 </div>
 <button id="btn" style="position: absolute;top:10px;right:10px; width:50px;z-index:1001; display: none">
     close
 </button>
 
 <script>
-let a = document.getElementById("shopify-section-announcement-bar");
+let a = document.querySelector("shopify-section-announcement-bar");
 
 let announceBar = document.getElementById("demo");
+ 
 let button = document.getElementById("btn");
 button.addEventListener("click",()=>{
  announceBar.style.display="none"
 button.style.display="none"
 })
 
-const url = `https://free-shipping-bars.herokuapp.com/get-script?shop=${window.location.hostname}`
+const url = `https://87d6-2405-201-e021-18ae-bc92-d01f-6428-98e5.ngrok.io/get-script?shop=${window.location.hostname}`
 fetch(url)
   .then(response => response.json())
   .then(data => {
